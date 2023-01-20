@@ -42,4 +42,5 @@ while counter <= game_length:
         print ("Wrong - the correct answer is " + game_data.get(question))
     counter += 1 
 
+# need to remove questions after they are asked
 
