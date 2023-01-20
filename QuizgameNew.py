@@ -3,6 +3,8 @@
 
 
 #data sets
+from random import random
+from random import randint
 general_knowledge = { "What is the capital of France?": "Paris", "What is the currency of Japan?": "Yen", "What is the highest mountain in the world?": "Mount Everest", "What is the largest ocean in the world?": "Pacific Ocean", "What is the smallest country in the world?": "Vatican City", "What is the largest mammal in the world?": "Blue Whale", "What is the most populous city in the world?": "Tokyo", "What is the longest river in the world?": "Nile River", "What is the tallest mammal in the world?": "Giraffe", "What is the most populous country in the world?": "China", "What is the capital of Australia?": "Canberra", "What is the currency of Canada?": "Canadian dollar", "What is the highest peak in North America?": "Denali", "What is the largest desert in the world?": "Antarctic Desert", "What is the smallest continent in the world?": "Australia", "What is the largest bird in the world?": "Ostrich", "What is the most populous continent in the world?": "Asia", "What is the capital of Germany?": "Berlin", "What is the currency of Mexico?": "Mexican peso", "What is the highest point in Africa?": "Mount Kilimanjaro" }
 
 british_history = { "Who was the first Tudor monarch of England?": "Henry VII", "Who was the first Stuart monarch of England?": "James I", "Who was the last Tudor monarch of England?": "Elizabeth I", "Who was the last Stuart monarch of England?": "Anne", "When did the War of the Roses end?":"1485", "What was the name of the treaty that established the end of the Hundred Years' War?": "Treaty of Troyes", "When did the Magna Carta signed?": "1215", "Who was the leader of the Roundheads during the English Civil War?":"Oliver Cromwell", "When was the Battle of Waterloo fought?": "1815", "What was the name of the queen who ruled England before Victoria?": "Elizabeth II", "When was the Great Fire of London?": "1666", "What was the name of the queen who ruled England before Elizabeth II?": "Elizabeth I", "When was the Industrial Revolution in Britain?":"1760-1840", "Who was the leader of the Jacobites during the Jacobite Rising of 1745?": "Charles Edward Stuart", "When was the Battle of Britain fought?":"1940", "What was the name of the queen who ruled England before Elizabeth I?":"Mary I", "When was the Battle of Trafalgar fought?":"1805", "Who was the leader of the Jacobites during the Jacobite Rising of 1689?":"Viscount Dundee", "When was the Battle of Agincourt fought?":"1415", "What was the name of the queen who ruled England before Mary I?":"Jane Grey" }
@@ -20,9 +22,24 @@ else:
     else:
         if game_theme == "3":
             game_data = kings_and_queens_of_rock
+        else:
+            print("bad selection try again")
 
-print (game_data)
-#if (game_theme != 1) and (game_theme != 2) and (game_theme != 3):
-#    print ("Bad selection try again")
+game_length = len(game_data)
+
+counter = 1
+score = 0
+while counter <= game_length:
+    print ("Ok here's question " + str(counter) + " of " + str(game_length))
+    question_num = randint(1, game_length-1)
+    questions = list(game_data)
+    question = questions[question_num]
+    answer_question = input (question)
+    if answer_question == game_data.get(question):
+        score += 1
+        print ("Correct! " + "You score 1 point. " + "You have " + str(score) + " points.")
+    else: 
+        print ("Wrong - the correct answer is " + game_data.get(question))
+    counter += 1 
 
 
