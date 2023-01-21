@@ -11,6 +11,26 @@ british_history = { "Who was the first Tudor monarch of England?": "Henry VII", 
 
 kings_and_queens_of_rock = { "Who is known as the 'King of Rock and Roll'?": "Elvis Presley", "Who is known as the 'Queen of Rock and Roll'?": "Tina Turner", "Who is known as the 'Godfather of Soul'?": "James Brown", "Who is known as the 'King of the Blues'?": "B.B. King", "Who is known as the 'Queen of Soul'?": "Aretha Franklin", "Who is known as the 'King of Pop'?": "Michael Jackson", "Who is known as the 'Queen of Pop'?": "Madonna", "Who is known as the 'King of Punk'?": "Iggy Pop", "Who is known as the 'Queen of Punk'?": "Patti Smith", "Who is known as the 'King of Metal'?": "Ozzy Osbourne", "Who is known as the 'Queen of Metal'?": "Lita Ford", "Who is known as the 'King of Rockabilly'?": "Elvis Presley", "Who is known as the 'Queen of Rockabilly'?": "Wanda Jackson", "Who is known as the 'King of Country'?": "George Strait",}
 
+def switch_player(current_player, player_count):
+    if player_count == 3:
+        if current_player < 3:
+            new_player = current_player + 1
+        else:
+            new_player = 1
+    if player_count == 2:
+        if current_player == 1:
+            new_player = 2
+        else:
+            new_player = 1
+    if player_count == 1:
+        new_player = 1
+    
+    return new_player
+
+
+
+
+
 game_theme = input("Select 1 for General Knowledge, 2 for British History, 3 for Kings and Queens of Rock!  ")
 print (game_theme)
 game_data = {}
@@ -26,21 +46,38 @@ else:
             print("bad selection try again")
 
 game_length = len(game_data)
-
+fixed_game_length = game_length
 counter = 1
-score = 0
-while counter <= game_length:
-    print ("Ok here's question " + str(counter) + " of " + str(game_length))
-    question_num = randint(1, game_length-1)
-    questions = list(game_data)
+scores = [0, 0, 0]
+questions = list(game_data)
+
+player_count = input("How many players? (1 , 2, or 3)")
+
+if player_count != "1" and player_count != "2" and player_count !="3":
+    print ("Invalid entry - start over")
+    player_count = 0
+    counter = 100
+
+player_num = 1
+while counter <= fixed_game_length:
+    print ("Ok " + "player " + str(player_num) + " it's your turn.  Answer question " + str(counter) + " of " + str(fixed_game_length))
+    question_num = randint(1, game_length) - 1
     question = questions[question_num]
     answer_question = input (question)
     if answer_question == game_data.get(question):
-        score += 1
-        print ("Correct! " + "You score 1 point. " + "You have " + str(score) + " points.")
+        scores [player_num-1] += 1
+        print ("Correct! " + "You score 1 point. " + "You have " + str(scores[player_num-1]) + " points.")
     else: 
         print ("Wrong - the correct answer is " + game_data.get(question))
     counter += 1 
+    questions.pop(question_num)
+    
+    game_length = game_length - 1
+    new_player = switch_player(player_num, int(player_count))
+    player_num = new_player
 
-# need to remove questions after they are asked
+score_counter = 0
+while score_counter < int(player_count):
+    print ("Player " + str(score_counter+ 1) + " score: " + str(scores[score_counter]))
+    score_counter += 1
 
