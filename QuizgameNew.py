@@ -1,5 +1,7 @@
-# this is a Quiz Game that is word puzzles and trivia. the game has a theme. the games can be configured: 
-# number of players and type of game can be selected
+# this is a trvia question Quiz Game. The game has a theme which can be chosen by the players from 3 options. 
+# number of players up to 3 is avaialble
+# some known flaws are that answers require precise spelling and capitalization and in some cases punctionation (like B.B. King for example)
+# the questions are a fixed set and static
 
 
 #data sets
